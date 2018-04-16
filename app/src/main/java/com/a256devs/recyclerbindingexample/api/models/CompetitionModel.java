@@ -1,9 +1,11 @@
 package com.a256devs.recyclerbindingexample.api.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CompetitionModel {
+public class CompetitionModel implements Comparable<CompetitionModel> {
     @SerializedName("_links")
     @Expose
     private LinksModel links;
@@ -34,6 +36,8 @@ public class CompetitionModel {
     @SerializedName("lastUpdated")
     @Expose
     private String lastUpdated;
+
+    private String compareString;
 
     public LinksModel getLinks() {
         return links;
@@ -115,4 +119,16 @@ public class CompetitionModel {
         this.lastUpdated = lastUpdated;
     }
 
+    @Override
+    public int compareTo(@NonNull CompetitionModel o) {
+        return 0;
+    }
+
+    public String getCompareString() {
+        return compareString;
+    }
+
+    public void setCompareString(String compareString) {
+        this.compareString = compareString;
+    }
 }
