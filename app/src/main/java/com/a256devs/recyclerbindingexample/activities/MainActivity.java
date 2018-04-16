@@ -16,6 +16,7 @@ import com.a256devs.recyclerbindingexample.api.models.CompetitionModel;
 import com.a256devs.recyclerbindingexample.binding.RecyclerBindingAdapterFiltered;
 import com.a256devs.recyclerbindingexample.binding.RecyclerConfiguration;
 import com.a256devs.recyclerbindingexample.databinding.ActivityMainBinding;
+import com.a256devs.recyclerbindingexample.databinding.ItemCompetitionBinding;
 import com.a256devs.recyclerbindingexample.di.App;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     CompetitionModel cmpCompetition = new CompetitionModel();
 
-    RecyclerConfiguration rvConfig;
+    RecyclerConfiguration rvConfig = new RecyclerConfiguration();
     RecyclerBindingAdapterFiltered<CompetitionModel> rvAdapter;
 
     @Inject
@@ -80,17 +81,23 @@ public class MainActivity extends AppCompatActivity {
             rvConfig.setLayoutManager(new LinearLayoutManager(this));
             SparseArray<RecyclerBindingAdapterFiltered.OnItemClickListener<CompetitionModel>> listeners = new SparseArray<>();
             listeners.put(R.id.btnLeague, (position, item) -> {
-                Toast.makeText(this, "Click Leage on position "+ String.valueOf(position)+ " for"+item.getCaption(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Click Leage on position "+ String.valueOf(position)+ " for "+item.getCaption(), Toast.LENGTH_SHORT).show();
             });
             listeners.put(R.id.btnFixtures, (position, item) -> {
-                Toast.makeText(this, "Click Fixtures on position "+ String.valueOf(position)+ " for"+item.getCaption(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Click Fixtures on position "+ String.valueOf(position)+ " for "+item.getCaption(), Toast.LENGTH_SHORT).show();
             });
             listeners.put(R.id.btnTeams, (position, item) -> {
-                Toast.makeText(this, "Click Teams on position "+ String.valueOf(position)+ " for"+item.getCaption(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Click Teams on position "+ String.valueOf(position)+ " for "+item.getCaption(), Toast.LENGTH_SHORT).show();
             });
             rvAdapter = new RecyclerBindingAdapterFiltered<CompetitionModel>(R.layout.item_competition, BR.competition, competitions, 0, null, listeners);
             rvAdapter.setOnItemClickListener((position, item) -> {
                 Toast.makeText(this, "Item in position "+String.valueOf(position)+" clicked", Toast.LENGTH_SHORT).show();
+            });
+            rvAdapter.setOnBindHolderListener((holder, position, item) -> {
+                ItemCompetitionBinding bindingHolder = (ItemCompetitionBinding) (holder.getBinding());
+                bindingHolder.btnMore.setOnClickListener(v-> {
+                    bindingHolder.setAdditionalVisibility(!bindingHolder.getAdditionalVisibility());
+                });
             });
             rvAdapter.setHasStableIds(true);
             rvAdapter.setFiltereditems(competitions, cmpCompetition);

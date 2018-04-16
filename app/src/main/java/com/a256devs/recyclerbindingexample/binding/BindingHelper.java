@@ -2,6 +2,7 @@ package com.a256devs.recyclerbindingexample.binding;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
+import android.databinding.InverseBindingAdapter;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -33,6 +34,4 @@ public class BindingHelper {
     public static void setVisibility(View view, int visibility) {
         view.setVisibility(visibility);
     }
-
-
 }

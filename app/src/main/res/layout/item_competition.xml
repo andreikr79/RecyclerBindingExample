@@ -77,13 +77,14 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/btnMore"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:visibility="visible"
                     android:layout_below="@id/tv_competition"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="16dp"
-                    android:text='@{additionalVisibility ? "+" : "-"}'
+                    android:text='@{additionalVisibility ? "-" : "+"}'
                     tools:text="+" />
 
                 <LinearLayout
