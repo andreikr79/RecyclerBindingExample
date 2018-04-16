@@ -1,6 +1,7 @@
 package com.a256devs.recyclerbindingexample.api.models;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -120,8 +121,14 @@ public class CompetitionModel implements Comparable<CompetitionModel> {
     }
 
     @Override
-    public int compareTo(@NonNull CompetitionModel o) {
-        return 0;
+    public int compareTo(@NonNull CompetitionModel cmp) {
+        if(TextUtils.isEmpty(cmp.getCompareString())) return 0;
+        String cmpStr = cmp.getCompareString().toUpperCase();
+        boolean equals = false;
+        if(caption.toUpperCase().contains(cmpStr)) equals = true;
+        if(league.toUpperCase().contains(cmpStr)) equals = true;
+        if(equals) return 0;
+        return -1;
     }
 
     public String getCompareString() {
